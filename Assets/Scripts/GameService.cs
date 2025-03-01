@@ -7,6 +7,7 @@ public class GameService : MonoBehaviour
 
     #region Refrences
     [SerializeField] PlayerView playerView;
+    [SerializeField] Transform enemy;
     #endregion
 
     private EventService EventService;
@@ -15,7 +16,7 @@ public class GameService : MonoBehaviour
     private void Awake()
     {
         EventService = new EventService();
-        PlayerService = new PlayerService(EventService,playerView);
+        PlayerService = new PlayerService(EventService,playerView,enemy);
 
     }
 }

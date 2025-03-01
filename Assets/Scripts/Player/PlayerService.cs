@@ -9,11 +9,11 @@ namespace Assets.Scripts.Player
         private PlayerView playerView;
         private EventService eventService;
 
-        public PlayerService(EventService eventService,PlayerView playerView)
+        public PlayerService(EventService eventService,PlayerView playerView, Transform enemy)
         {
             this.eventService = eventService;
             this.playerView = playerView;
-            playerController = new PlayerController(eventService, playerView);
+            playerController = new PlayerController(eventService, playerView,enemy);
         }
 
     }
