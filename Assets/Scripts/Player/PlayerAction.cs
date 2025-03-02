@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Android.Gradle;
+using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
@@ -33,6 +34,14 @@ namespace Assets.Scripts.Player
             {
                 CrouchAttack();
             }
+            if(stateInfoLayer0.IsTag("Block"))
+            {
+                if (Input.GetKeyUp(KeyCode.LeftControl))
+                {
+                    animator.SetTrigger("BlockOff");
+                }
+            }
+
         }
 
         private void Attack()
@@ -44,6 +53,7 @@ namespace Assets.Scripts.Player
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 animator.SetTrigger("Punch2");
+                //add slide distance for heavy punch
             }
             
             if (Input.GetKeyDown(KeyCode.E))
@@ -53,6 +63,10 @@ namespace Assets.Scripts.Player
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 animator.SetTrigger("Kick2");
+            }
+            if(Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                animator.SetTrigger("BlockOn");
             }
         }
 

@@ -2715,7 +2715,7 @@ MonoBehaviour:
   animator: {fileID: 2107658809}
   playerAction: {fileID: 2107658812}
   rb: {fileID: 1949910754}
-  moveSpeed: 3
+  moveSpeed: 4
   jumpForce: 200
 --- !u!4 &1949910752
 Transform:
@@ -2908,7 +2908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 350
-  jumpDistance: 97.2
+  jumpDistance: 150
   animator: {fileID: 2107658809}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

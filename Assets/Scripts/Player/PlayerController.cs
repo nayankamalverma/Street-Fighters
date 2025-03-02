@@ -18,6 +18,7 @@ namespace Assets.Scripts.Player
 		private Transform playerTransform;
 		private Transform enemy;
 		private bool isFacingRight=true;
+		private bool isJumping=false;
 
 		public PlayerController(EventService eventService, PlayerView playerView, Transform enemy){
 			this.eventService = eventService;
@@ -98,8 +99,13 @@ namespace Assets.Scripts.Player
 		{
 			if (Input.GetKeyDown(KeyCode.W))
 			{
-				playerView.GetAnimator().SetTrigger("Jump");
-			}
+				if(!isJumping)
+                {
+                    isJumping = true;
+                    playerView.GetAnimator().SetTrigger("Jump");
+                }
+                coroutineRunner.StartCoroutine(JumpPause());
+            }
 			if (y < 0)
 			{
 				playerView.GetAnimator().SetBool("Crouch", true);
@@ -109,6 +115,13 @@ namespace Assets.Scripts.Player
 				playerView.GetAnimator().SetBool("Crouch", false);
 			}
 		}
-		#endregion
+
+        private IEnumerator JumpPause()
+        {
+            yield return new WaitForSeconds(0.5f);
+            isJumping = false;
+        }
+
+        #endregion
 	}
 }

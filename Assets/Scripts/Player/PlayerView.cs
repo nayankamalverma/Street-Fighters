@@ -29,7 +29,7 @@ namespace Assets.Scripts.Player
 			playerController.Update();
 		}
 
-		public Transform GetPlayerTransform() => transform;
+        public Transform GetPlayerTransform() => transform;
 		public Animator GetAnimator() => animator;
 		public Rigidbody GetRigidBody() => rb;
 		public float GetMoveSpeed() => moveSpeed;
