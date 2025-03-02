@@ -10,14 +10,13 @@ namespace Assets.Scripts.Player
 		private EventService eventService;
 		private PlayerView playerView;
 		private CoroutineRunner coroutineRunner;
+		private AnimatorStateInfo stateInfoLayer0;
 
         private float x;
 		private float y;
 		private float moveSpeed;
 		private Transform playerTransform;
 		private Transform enemy;
-		private bool isGrounded=true;
-		private bool isCrouched=false;
 		private bool isFacingRight=true;
 
 		public PlayerController(EventService eventService, PlayerView playerView, Transform enemy){
@@ -32,8 +31,10 @@ namespace Assets.Scripts.Player
 
 		public void Update()
 		{
+            //animation state
+            stateInfoLayer0 = playerView.GetAnimator().GetCurrentAnimatorStateInfo(0);
             //facing toward enemy
-			if(playerTransform.position.x < enemy.position.x)
+            if (playerTransform.position.x < enemy.position.x)
             {
                 coroutineRunner.StartCoroutine(FaceLeft());
             }
@@ -41,21 +42,23 @@ namespace Assets.Scripts.Player
             {
                 coroutineRunner.StartCoroutine(FaceRight());
             }
-
             //movements
             x = Input.GetAxis("Horizontal");
 			y = Input.GetAxis("Vertical");
 			Move();
 			JumpAndCrouch();
-		}
+        }
 
-		#region movements
+
+        #region movements
 		IEnumerator FaceRight()
         {
             if(isFacingRight){
                 isFacingRight = false;
                 yield return new WaitForSeconds(0.15f);
                 playerTransform.Rotate(0, 180, 0);
+				playerView.GetAnimator().SetLayerWeight(0, 0);
+				playerView.GetAnimator().SetLayerWeight(1, 1);
             }
         }
 
@@ -65,13 +68,15 @@ namespace Assets.Scripts.Player
                 isFacingRight = true;
                 yield return new WaitForSeconds(0.15f);
                 playerTransform.Rotate(0, -180, 0);
+				playerView.GetAnimator().SetLayerWeight(0, 1);
+                playerView.GetAnimator().SetLayerWeight(1, 0);
             }
         }
 
         private void Move()
 		{
 			moveSpeed = playerView.GetMoveSpeed();
-            if( isGrounded && !isCrouched){// if grounded and not crouched player can move
+            if(stateInfoLayer0.IsTag("Motion")){// if grounded and not crouched player can move
                 if (x > 0)
                 {
                     playerTransform.position += Vector3.right * moveSpeed * Time.deltaTime;
@@ -91,21 +96,16 @@ namespace Assets.Scripts.Player
 		}
 		private void JumpAndCrouch()
 		{
-			//ground Check
-			isGrounded = Physics.CheckSphere(playerView.GetGroundCheck().position, 1f, playerView.GetGroundLayer());
-
-			if (isGrounded && Input.GetKeyDown(KeyCode.W))
+			if (Input.GetKeyDown(KeyCode.W))
 			{
 				playerView.GetAnimator().SetTrigger("Jump");
 			}
 			if (y < 0)
 			{
-				isCrouched = true;
 				playerView.GetAnimator().SetBool("Crouch", true);
 			}
 			if (y == 0)
 			{
-				isCrouched =false;
 				playerView.GetAnimator().SetBool("Crouch", false);
 			}
 		}

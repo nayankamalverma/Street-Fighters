@@ -6,16 +6,84 @@ namespace Assets.Scripts.Player
 	{
 		private Transform playerTransform;
         [SerializeField]private float jumpForce;
+        [SerializeField] private float jumpDistance;
+        [SerializeField] private Animator animator;
 
+        private AnimatorStateInfo stateInfoLayer0;
 
-        public void SetReferences(Transform playerTransform,float jumpForce)
+        public void SetReferences(Transform playerTransform, float jumpForce)
         {
             this.playerTransform = playerTransform;
             this.jumpForce = jumpForce;
         }
 
+        private void Update()
+        {
+            stateInfoLayer0 = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (stateInfoLayer0.IsTag("Motion"))
+            {
+                Attack();
+            }
+            if(stateInfoLayer0.IsTag("Jump"))
+            {
+                JumpAttack();
+            }
+            if (stateInfoLayer0.IsTag("Crouch"))
+            {
+                CrouchAttack();
+            }
+        }
+
+        private void Attack()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                animator.SetTrigger("Punch1");
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                animator.SetTrigger("Punch2");
+            }
+            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                animator.SetTrigger("Kick1");
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.SetTrigger("Kick2");
+            }
+        }
+
+        private void JumpAttack()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.SetTrigger("Kick2");
+            }
+        }
+
+        private void CrouchAttack(){
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animator.SetTrigger("Kick2");
+            }
+        }
+
         public void Jump(){
-            playerTransform.position += Vector3.up * jumpForce * Time.deltaTime;
+            playerTransform.Translate(Vector3.up * jumpForce * Time.deltaTime);
+        }
+
+        public void ForwardFlip(){
+            playerTransform.Translate(Vector3.up * jumpForce * Time.deltaTime);
+            playerTransform.Translate(Vector3.right * jumpDistance * Time.deltaTime);
+        }
+
+        public void BackFlip()
+        {
+            playerTransform.Translate(Vector3.up * jumpForce * Time.deltaTime);
+            playerTransform.Translate(Vector3.left * jumpDistance * Time.deltaTime);
         }
 
 	}
