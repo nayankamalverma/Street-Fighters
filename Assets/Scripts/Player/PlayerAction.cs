@@ -1,15 +1,14 @@
-﻿using Unity.Android.Gradle;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
 	public class PlayerAction :MonoBehaviour
 	{
-		private Transform playerTransform;
         [SerializeField]private float jumpForce;
         [SerializeField] private float jumpDistance;
         [SerializeField] private Animator animator;
 
+        private Transform playerTransform;
         private AnimatorStateInfo stateInfoLayer0;
 
         public void SetReferences(Transform playerTransform, float jumpForce)
@@ -41,7 +40,6 @@ namespace Assets.Scripts.Player
                     animator.SetTrigger("BlockOff");
                 }
             }
-
         }
 
         private void Attack()
@@ -78,11 +76,19 @@ namespace Assets.Scripts.Player
             }
         }
 
-        private void CrouchAttack(){
+        private void CrouchAttack()
+        {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 animator.SetTrigger("Kick2");
             }
+        }
+
+        public void ReactHeavyHit(){
+            animator.SetTrigger("HeavyHit");
+        }
+        public void ReactHeadHit(){
+            animator.SetTrigger("HeadHit");
         }
 
         public void Jump(){

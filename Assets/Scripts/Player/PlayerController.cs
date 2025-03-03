@@ -10,11 +10,14 @@ namespace Assets.Scripts.Player
 		private EventService eventService;
 		private PlayerView playerView;
 		private CoroutineRunner coroutineRunner;
-		private AnimatorStateInfo stateInfoLayer0;
+
+		public AnimatorStateInfo stateInfoLayer0 { get; private set; }
 
         private float x;
 		private float y;
 		private float moveSpeed;
+        private float distance;
+        private float attackRange=1f;
 		private Transform playerTransform;
 		private Transform enemy;
 		private bool isFacingRight=true;
@@ -32,6 +35,7 @@ namespace Assets.Scripts.Player
 
 		public void Update()
 		{
+            distance = Vector3.Distance(playerTransform.position,enemy.position);
             //animation state
             stateInfoLayer0 = playerView.GetAnimator().GetCurrentAnimatorStateInfo(0);
             //facing toward enemy
@@ -55,6 +59,7 @@ namespace Assets.Scripts.Player
 		IEnumerator FaceRight()
         {
             if(isFacingRight){
+                
                 isFacingRight = false;
                 yield return new WaitForSeconds(0.15f);
                 playerTransform.Rotate(0, 180, 0);
@@ -66,6 +71,7 @@ namespace Assets.Scripts.Player
         IEnumerator FaceLeft()
         {
             if(!isFacingRight){
+                
                 isFacingRight = true;
                 yield return new WaitForSeconds(0.15f);
                 playerTransform.Rotate(0, -180, 0);
