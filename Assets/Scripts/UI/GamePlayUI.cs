@@ -43,7 +43,8 @@ namespace Assets.Scripts.UI
             UpdateFillValue();
         }
         private void UpdatePlayer2Health(int dmg){
-             p2Healt -= dmg/100;
+            Debug.Log("p2");
+             p2Healt -= dmg/100.0f;
             UpdateFillValue();
         }
 

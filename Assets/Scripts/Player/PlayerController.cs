@@ -17,8 +17,6 @@ namespace Assets.Scripts.Player
 		private float y;
 		private float moveSpeed;
         private int health=100;
-        private float distance;
-        private float attackRange=1f;
 		private Transform playerTransform;
 		private Transform enemy;
 		private bool isFacingRight=true;
@@ -45,7 +43,6 @@ namespace Assets.Scripts.Player
         public void Update()
 		{
             if(isActive){
-                distance = Vector3.Distance(playerTransform.position, enemy.position);
                 //animation state
                 stateInfoLayer0 = playerView.GetAnimator().GetCurrentAnimatorStateInfo(0);
                 //facing toward enemy
@@ -57,7 +54,6 @@ namespace Assets.Scripts.Player
                 {
                     coroutineRunner.StartCoroutine(FaceRight());
                 }
-
                 //movements
                 x = Input.GetAxis("Horizontal");
                 y = Input.GetAxis("Vertical");
