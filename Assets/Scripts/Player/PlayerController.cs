@@ -7,7 +7,7 @@ namespace Assets.Scripts.Player
 {
 	public class PlayerController
 	{
-		private EventService eventService;
+		public EventService eventService { get; private set; }
 		private PlayerView playerView;
 		private CoroutineRunner coroutineRunner;
 
@@ -16,12 +16,12 @@ namespace Assets.Scripts.Player
         private float x;
 		private float y;
 		private float moveSpeed;
-        private float distance;
-        private float attackRange=1f;
+        private int health=100;
 		private Transform playerTransform;
 		private Transform enemy;
 		private bool isFacingRight=true;
 		private bool isJumping=false;
+        public bool isActive=false;
 
 		public PlayerController(EventService eventService, PlayerView playerView, Transform enemy){
 			this.eventService = eventService;
@@ -32,31 +32,49 @@ namespace Assets.Scripts.Player
 			coroutineRunner = CoroutineRunner.Instance;
         }
 		
-
-		public void Update()
-		{
-            distance = Vector3.Distance(playerTransform.position,enemy.position);
-            //animation state
-            stateInfoLayer0 = playerView.GetAnimator().GetCurrentAnimatorStateInfo(0);
-            //facing toward enemy
-            if (playerTransform.position.x < enemy.position.x)
-            {
-                coroutineRunner.StartCoroutine(FaceLeft());
-            }
-            else
-            {
-                coroutineRunner.StartCoroutine(FaceRight());
-            }
-            //movements
-            x = Input.GetAxis("Horizontal");
-			y = Input.GetAxis("Vertical");
-			Move();
-			JumpAndCrouch();
+        public void OnRoundStart(){
+            playerView.GetAnimator().Play("Idle");
+            playerTransform.position = playerView.SpawnPos.position;
+            playerTransform.rotation = playerView.SpawnPos.rotation;
+            isFacingRight = true;
+            health = 100;
         }
 
+        public void Update()
+		{
+            if(isActive){
+                //animation state
+                stateInfoLayer0 = playerView.GetAnimator().GetCurrentAnimatorStateInfo(0);
+                //facing toward enemy
+                if (playerTransform.position.x < enemy.position.x)
+                {
+                    coroutineRunner.StartCoroutine(FaceLeft());
+                }
+                else
+                {
+                    coroutineRunner.StartCoroutine(FaceRight());
+                }
+                //movements
+                x = Input.GetAxis("Horizontal");
+                y = Input.GetAxis("Vertical");
+                Move();
+                JumpAndCrouch();
+            }
+        }
+
+        #region health
+        public void ReduceHealth(int dmg){
+            health -= dmg;
+            if (health <= 0)
+            {
+                playerView.GetAnimator().SetTrigger("KO");
+                eventService.OnNextRound.Invoke(2);
+            }//if player knocked out means player 2 win 
+        }
+        #endregion
 
         #region movements
-		IEnumerator FaceRight()
+        IEnumerator FaceRight()
         {
             if(isFacingRight){
                 
