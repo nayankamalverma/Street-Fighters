@@ -9,35 +9,41 @@ namespace Assets.Scripts.Player
         [SerializeField] private Animator animator;
 
         private Transform playerTransform;
+        private PlayerController playerController;
         private AnimatorStateInfo stateInfoLayer0;
 
-        public void SetReferences(Transform playerTransform, float jumpForce)
+        public void SetReferences(PlayerController playerController,Transform playerTransform)
         {
+            this.playerController = playerController;
             this.playerTransform = playerTransform;
-            this.jumpForce = jumpForce;
         }
 
         private void Update()
         {
-            stateInfoLayer0 = animator.GetCurrentAnimatorStateInfo(0);
+            if(playerController.isActive){
+                stateInfoLayer0 = animator.GetCurrentAnimatorStateInfo(0);
 
-            if (stateInfoLayer0.IsTag("Motion"))
-            {
-                Attack();
-            }
-            if(stateInfoLayer0.IsTag("Jump"))
-            {
-                JumpAttack();
-            }
-            if (stateInfoLayer0.IsTag("Crouch"))
-            {
-                CrouchAttack();
-            }
-            if(stateInfoLayer0.IsTag("Block"))
-            {
-                if (Input.GetKeyUp(KeyCode.LeftControl))
+                if (stateInfoLayer0.IsTag("Motion"))
                 {
-                    animator.SetTrigger("BlockOff");
+                    Attack();
+                }
+
+                if (stateInfoLayer0.IsTag("Jump"))
+                {
+                    JumpAttack();
+                }
+
+                if (stateInfoLayer0.IsTag("Crouch"))
+                {
+                    CrouchAttack();
+                }
+
+                if (stateInfoLayer0.IsTag("Block"))
+                {
+                    if (Input.GetKeyUp(KeyCode.LeftControl))
+                    {
+                        animator.SetTrigger("BlockOff");
+                    }
                 }
             }
         }

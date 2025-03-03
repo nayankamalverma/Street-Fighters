@@ -8,7 +8,8 @@ namespace Assets.Scripts.Enemy
 
     public class EnemyController : MonoBehaviour
     {
-
+        [SerializeField]
+        private Transform spawnPos;
         [SerializeField]
         private Animator animator;
         [SerializeField]
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Enemy
 
         private float distance;
         private EnemyStateMachine stateMachine;
+        public bool isActive = false;
 
         public AnimatorStateInfo stateInfoLayer0 { get; private set; }
         public EventService eventService { get; private set; }
@@ -44,15 +46,24 @@ namespace Assets.Scripts.Enemy
             canChangeState = true;
         }
 
+        public void OnRoundStart(){
+            transform.position = spawnPos.position;
+            transform.rotation = spawnPos.rotation;
+            ChangeState(EnemyState.Idle);
+            isFacingRight = true;
+        }
+
         private void Update()
         {
-            distance = Vector3.Distance(transform.position, playerTransform.position);
-            if (distance >= stopDistance) isInAttackRange = false;
-            else isInAttackRange = true;
+            if(isActive){
+                distance = Vector3.Distance(transform.position, playerTransform.position);
+                if (distance >= stopDistance) isInAttackRange = false;
+                else isInAttackRange = true;
 
-            stateInfoLayer0 = animator.GetCurrentAnimatorStateInfo(0);
-            FaceTowardPlayer();
-            stateMachine.Update();
+                stateInfoLayer0 = animator.GetCurrentAnimatorStateInfo(0);
+                FaceTowardPlayer();
+                stateMachine.Update();
+            }
         }
 
         private void FaceTowardPlayer()
