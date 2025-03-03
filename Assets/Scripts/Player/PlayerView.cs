@@ -15,7 +15,8 @@ namespace Assets.Scripts.Player
 		[SerializeField]
 		private float jumpForce;
 
-		private PlayerController playerController;
+
+        private PlayerController playerController;
 	
 
 		public void SetPlayerController(PlayerController playerController)

@@ -5,30 +5,24 @@ namespace Assets.Scripts.Enemy
 {
     public class EnemyStateMachine
     {
-        private EventService eventService;
         private EnemyController Owner;
         private IState currentState;
         private EnemyState currState;
 
         public Dictionary<EnemyState, IState> States = new Dictionary<EnemyState, IState>();
 
-        public EnemyStateMachine(EventService eventService, EnemyController enemyController)
+        public EnemyStateMachine(EnemyController enemyController)
         {
-            this.eventService = eventService;
             Owner = enemyController;
             currState = EnemyState.Idle;
-            //States.Add(EnemyState.Idle, new IdleState(enemyController));
-            //States.Add(EnemyState.Chase, new ChaseState(enemyController));
-            //States.Add(EnemyState.Attack, new AttackState(enemyController));
-            //States.Add(EnemyState.Block, new BlockState(enemyController));
-            //States.Add(EnemyState.Retreat, new RetreatState(enemyController));
-            currentState = States[currState];
             CreateState();
         }
 
         private void CreateState()
         {
-            
+            States.Add(EnemyState.Idle, new IdleState(Owner));
+            States.Add(EnemyState.Chase, new ChaseState(Owner));
+            States.Add(EnemyState.Attack, new AttackState(Owner));
         }
 
         protected void ChangeState(IState newState)
