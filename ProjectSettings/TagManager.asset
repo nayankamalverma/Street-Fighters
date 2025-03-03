@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - KickLight
+  - HeavyKick
+  - HeavyPunch
+  - LightPunch
   layers:
   - Default
   - TransparentFX

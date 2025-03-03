@@ -15,14 +15,23 @@ namespace Assets.Scripts.Enemy
 		}
 		public override void Update()
 		{
-            if (!controller.isInAttackRange)
+			if (!controller.isInAttackRange && controller.canChangeState)
 			{
 				controller.ChangeState(EnemyState.Chase);
 			}
-			if (controller.isInAttackRange) 
+			if (controller.isInAttackRange && controller.canChangeState)
 			{
 				controller.ChangeState(EnemyState.Attack);
 			}
 		}
+
+		public void ReactHeavyHit(){
+            controller.GetAnimator().SetTrigger("HeavyHit");
+			controller.PauseStateChange();
+        }
+		public void ReactHeadHit(){
+            controller.GetAnimator().SetTrigger("HeadHit");
+	controller.PauseStateChange();	
+        }
 	}
 }

@@ -10,7 +10,8 @@ namespace Assets.Scripts.Player
 		private EventService eventService;
 		private PlayerView playerView;
 		private CoroutineRunner coroutineRunner;
-		private AnimatorStateInfo stateInfoLayer0;
+
+		public AnimatorStateInfo stateInfoLayer0 { get; private set; }
 
         private float x;
 		private float y;

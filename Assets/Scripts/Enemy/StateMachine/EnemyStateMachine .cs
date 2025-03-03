@@ -8,6 +8,7 @@ namespace Assets.Scripts.Enemy
         private EnemyController Owner;
         private IState currentState;
         private EnemyState currState;
+        private IdleState idleState;
 
         public Dictionary<EnemyState, IState> States = new Dictionary<EnemyState, IState>();
 
@@ -20,7 +21,8 @@ namespace Assets.Scripts.Enemy
 
         private void CreateState()
         {
-            States.Add(EnemyState.Idle, new IdleState(Owner));
+            idleState = new IdleState(Owner);
+            States.Add(EnemyState.Idle, idleState);
             States.Add(EnemyState.Chase, new ChaseState(Owner));
             States.Add(EnemyState.Attack, new AttackState(Owner));
         }
@@ -42,5 +44,8 @@ namespace Assets.Scripts.Enemy
             currState = newState;
         }
 
+        public void ReactHeavyHit()=> idleState.ReactHeavyHit();
+        public void ReactHeadHit()=> idleState.ReactHeadHit();
+        
     }
 }

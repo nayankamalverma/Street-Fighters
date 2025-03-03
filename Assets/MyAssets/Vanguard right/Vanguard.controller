@@ -396,7 +396,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HeadKick
+  m_Name: KeenKick
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -411,7 +411,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: d3d6bd769ecb5a84db9e1738a065d211, type: 3}
+  m_Motion: {fileID: 7400000, guid: 37f1c4a8297c2f7418bbe3ca1b013a00, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -439,7 +439,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 40a965ff3a8b1d94bbb300e188e82ee0, type: 3}
+  m_Motion: {fileID: 7400000, guid: 916658b34e8dc314eb6a5fd53af93e79, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -701,7 +701,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 84fb912b8975e6a4bb0f00a76197ef74, type: 3}
+  m_Motion: {fileID: 7400000, guid: fc6cfbf69700b7e4096e5539c8754a35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1215,7 +1215,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 2
     m_ConditionEvent: Left
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -1694,7 +1694,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 84fb912b8975e6a4bb0f00a76197ef74, type: 3}
+  m_Motion: {fileID: 7400000, guid: fc6cfbf69700b7e4096e5539c8754a35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2067,7 +2067,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 40a965ff3a8b1d94bbb300e188e82ee0, type: 3}
+  m_Motion: {fileID: 7400000, guid: 916658b34e8dc314eb6a5fd53af93e79, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2865,7 +2865,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 3fdfa580c97a45d469e91285911e6157, type: 3}
+  m_Motion: {fileID: 7400000, guid: 8a2f082af26e8b545afcc1f3a459a0bc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3096,7 +3096,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HeadKick
+  m_Name: KeenKick
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -3111,7 +3111,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: d3d6bd769ecb5a84db9e1738a065d211, type: 3}
+  m_Motion: {fileID: 7400000, guid: 37f1c4a8297c2f7418bbe3ca1b013a00, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3285,7 +3285,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 3fdfa580c97a45d469e91285911e6157, type: 3}
+  m_Motion: {fileID: 7400000, guid: 8a2f082af26e8b545afcc1f3a459a0bc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
