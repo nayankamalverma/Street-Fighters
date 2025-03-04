@@ -50,10 +50,12 @@ namespace Assets.Scripts.Enemy
         }
 
         public void OnRoundStart(){
-            transform.position = spawnPos.position;
-            transform.rotation = spawnPos.rotation;
+            
             ChangeState(EnemyState.Idle);
             isFacingRight = false;
+            StartCoroutine(FaceLeft());
+            transform.position = spawnPos.position;
+            transform.rotation = spawnPos.rotation;
             health = 100;
         }
 
